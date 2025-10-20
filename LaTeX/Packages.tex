@@ -9,6 +9,11 @@
 %--------------------------------------------------------------
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{caption}
+% Subfigure captions
+\DeclareCaptionLabelFormat{custom}{\figurename~\thefigure~(#2)}
+\captionsetup[subfigure]{labelformat=custom}
+
 \usepackage{enumitem}
 \usepackage{float}
 \usepackage{placeins}
