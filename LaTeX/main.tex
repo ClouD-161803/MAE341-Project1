@@ -99,66 +99,56 @@ This project aims to investigate the orbit of an active, Earth-orbiting Starlink
 \newpage
 \section{Data Collection}
 
-The observations of \textit{Starlink-3988} were performed over three separate passes above Princeton, New Jersey, between 19 and 21 October 2025, using a combination of digital and visual tracking techniques. Data collection employed the \textit{Satellite Tracker} mobile application (Vito Technology) for live positioning and elevation angles, supplemented by the \textit{Heavens Above} website for verification of pass times and trajectory predictions. Each observation session consisted of recording the time, azimuth, and elevation angle at fixed reference points as the satellite traversed the sky. Screenshots of the tracking interface were captured as supporting evidence of measurement. All times were logged in Eastern Daylight Time (EDT) and later converted to UTC for consistency. Weather conditions and horizon obstructions were noted when relevant. This approach ensured sufficient temporal accuracy to support later calculations of orbital period and angular velocity, while allowing for a consistent measurement procedure across multiple sessions. Minor limitations included atmospheric haze, variable signal strength, and the finite angular precision of the mobile tracking display.
+To estimate the satellite's orbital period, two different methods were employed:
+
+\begin{enumerate}
+    \item Two overhead passes were tracked, with periodic logging of Azimuth and Elevation Angle parameters. In particular, the time of first appearance of the satellite above the horizon, followed by timestamps at every integer minute elapsed, and finally the time of disappearance of the satellite below the horizon, were all recorded. These values were then converted to Right Ascension and Declination, and, using these parameters from two distinct timestamps, the orbital period was estimated. (This corresponds to Method 1 in the instructions provided by the preceptors)
+    \item The time at positions of constant elevation angle was recorded, and the orbital period was estimated as an average of these measurements. (This corresponds to Method 4 in the instructions provided by the preceptors)
+\end{enumerate}
+
+The results from the two methods were then compared and one of the two results was selected for the remainder of the calculations.
+
+\subsection{Method 1}
+
+The observations of \textit{Starlink-3988} for Method 1 were performed over two separate passes above the Princeton University Art Museum, New Jersey, United States, on 19 October 2025, using a combination of qualitative and quantitative tracking techniques. The \textit{Satellite Tracker} Android application (Vito Technology) was employed for qualitative tracking of the satellite in the night sky. We first used the app to obtain a prediction of the time of appearance of the satellite above the horizon. Then, the app was used to record both the time of appearance and disappearance of the satellite above and below the horizon. On the same Android phone, time was tracked to record the precise moment each integer minute would elapse. Concurrently, the \textit{Satellite Tracker Pro} iOS application (Kornienko Vyacheslav) was used on a separate Apple phone for quantitative measurements. In coordination with time tracking from the Android phone, we logged values of Azimuth and Elevation Angles, as well as the Distance from the observer to the satellite, through consecutive screenshots. By avoiding hand logging the data in real time, the three measurements were simultaneous, and, thus, any potential transient deviation was eliminated. The operation required two mobile phones and two people (the second person involved was my roomate, Tomás Consonni, an Economics student who kindly provided access to his iPhone). All times were logged in Eastern Daylight Time (EDT).
+
+The observed Azimuth and Elevation Angles, measured from the Earth's surface, were converted to Right Ascension ($\alpha$) and Declination ($\delta$). This transformation to the equatorial coordinate system, which is relative to the Earth's barycenter, was performed using a Python script provided by the course preceptors. We input the coordinates of our observation station as \SI{40.3463}{\degree}N, \SI{-74.6580}{\degree}E, GMT-04:00. This code also uses the distance to the satellite as an additional input. The raw data are presented in Table~\ref{tab:method1_data} below.
 
 \begin{table}[H]
-\centering
-\caption{Raw Observational Data and Coordinate-Shifted Data}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
-\textbf{Date} & \textbf{Time} & \textbf{Azimuth} & \textbf{Elevation} & \textbf{Right} & \textbf{Declination} \\ 
-\textbf{ } & \textbf{ } & \textbf{(°)} & \textbf{Angle (°)} & \textbf{Ascension (°)} & \textbf{(°)} \\ \hline
-\multicolumn{6}{|c|}{\textbf{Observation 1 – 19 October 2025}} \\ \hline
-10/19 & 19:39:15 & 321.0 & 10.0 & 189.3 & 43.8 \\ \hline
-10/19 & 19:40:00 & 324.5 & 13.9 & 189.5 & 49.3 \\ \hline
-10/19 & 19:41:00 & 333.4 & 21.7 & 188.3 & 60.8 \\ \hline
-10/19 & 19:42:00 & 350.5 & 32.1 & 175.8 & 78.7 \\ \hline
-10/19 & 19:43:00 & 024.8 & 41.0 & 029.8 & 71.3 \\ \hline
-10/19 & 19:44:00 & 061.3 & 37.0 & 023.0 & 43.0 \\ \hline
-10/19 & 19:45:00 & 084.6 & 26.1 & 022.3 & 20.4 \\ \hline
-10/19 & 19:46:00 & 096.2 & 16.9 & 022.8 & 06.3 \\ \hline
-10/19 & 19:46:29 & 102.5 & 10.2 & 023.8 & -03.7 \\ \hline
-\multicolumn{6}{|c|}{\textbf{Observation 2 – 20 October 2025}} \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
-\multicolumn{6}{|c|}{\textbf{Observation 3 – 21 October 2025}} \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
- &  &  &  &  &  \\ \hline
-\end{tabular}
+    \centering
+    \caption{Raw empirical data for Method 1 observations}
+    \label{tab:method1_data}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{Date} & \textbf{Time} & \textbf{Azimuth} & \textbf{Elevation} & \textbf{Distance} & \textbf{Right} & \textbf{Declination} \\ 
+        \textbf{ } & \textbf{ } & \textbf{(°)} & \textbf{Angle (°)} & \textbf{(km)} & \textbf{Ascension (°)} & \textbf{(°)} \\ \hline
+        \multicolumn{7}{|c|}{\textbf{Observation 1 – 19 October 2025}} \\ \hline
+        10/19 & 21:18:49 & 287.6 & 10.2 & 1628 &  &  \\ \hline
+        10/19 & 21:19:00 & 286.3 & 11.0 & 1576 &  &  \\ \hline
+        10/19 & 21:20:00 & 273.1 & 17.9 & 1226 &  &  \\ \hline
+        10/19 & 21:21:00 & 262.7 & 21.8 & 1083 &  &  \\ \hline
+        10/19 & 21:22:00 & 241.0 & 26.3 &  954 &  &  \\ \hline
+        10/19 & 21:23:00 & 213.6 & 25.9 &  541 &  &  \\ \hline
+        10/19 & 21:24:00 & 190.3 & 20.2 & 1137 &  &  \\ \hline
+        10/19 & 21:25:00 & 176.0 & 13.7 & 1419 &  &  \\ \hline
+        10/19 & 21:25:38 & 169.3 & 10.1 & 1657 &  &  \\ \hline
+        \multicolumn{7}{|c|}{\textbf{Observation 2 – 20 October 2025}} \\ \hline
+        10/20 & 19:31:03 & 319.7 & 10.5 & 1636 &  &  \\ \hline
+        10/20 & 19:32:00 & 325.7 & 17.5 & 1264 &  &  \\ \hline
+        10/20 & 19:33:00 & 337.5 & 28.0 &  930 &  &  \\ \hline
+        10/20 & 19:34:00 & 006.1 & 42.2 &  694 &  &  \\ \hline
+        10/20 & 19:35:00 & 056.7 & 43.7 &  677 &  &  \\ \hline
+        10/20 & 19:36:00 & 088.6 & 29.9 &  886 &  &  \\ \hline
+        10/20 & 19:37:00 & 101.9 & 18.6 & 1216 &  &  \\ \hline
+        10/20 & 19:38:00 & 108.3 & 11.3 & 1579 &  &  \\ \hline
+        10/20 & 19:38:16 & 109.5 & 09.8 & 1675 &  &  \\ \hline
+    \end{tabular}
 \end{table}
 
-% \begin{table}[H]
-% \centering
-% \caption{Raw Observational Data and Coordinate-Shifted Data}
-% \renewcommand{\arraystretch}{1.2}
-% \begin{tabular}{|c|c|c|c|c|c|c|}
-% \hline
-% \textbf{Date} & \textbf{Time} & \textbf{Azimuth} & \textbf{Elevation} & \textbf{Distance} & \textbf{Right} & \textbf{Declination} \\ 
-% \textbf{ } & \textbf{ } & \textbf{(°)} & \textbf{Angle (°)} & \textbf{(km)} & \textbf{Ascension (°)} & \textbf{(°)} \\ \hline
-% \multicolumn{7}{|c|}{\textbf{Observation 1 – 19 October 2025}} \\ \hline
-% 10/19 & 19:39:15 & 321.0 & 09.7 & 189.3 & 43.8 &  \\ \hline
-% 10/19 &  &  &  &  &  &  \\ \hline
-% 10/19 &  &  &  &  &  &  \\ \hline
-% 10/19 &  &  &  &  &  &  \\ \hline
-% \multicolumn{7}{|c|}{\textbf{Observation 2 – 20 October 2025}} \\ \hline
-%  &  &  &  &  &  &  \\ \hline
-%  &  &  &  &  &  &  \\ \hline
-%  &  &  &  &  &  &  \\ \hline
-%  &  &  &  &  &  &  \\ \hline
-% \multicolumn{7}{|c|}{\textbf{Observation 3 – 21 October 2025}} \\ \hline
-%  &  &  &  &  &  &  \\ \hline
-%  &  &  &  &  &  &  \\ \hline
-%  &  &  &  &  &  &  \\ \hline
-%  &  &  &  &  &  &  \\ \hline
-% \end{tabular}
-% \end{table}
+In preparation for the real observation, a test logging of data was also performed using the \textit{In The Sky} website. These data can be found in Appendix~\ref{Appendix} and do not contain distance to satellite entries.
 
-
+\subsection{Method 4}
 
 \section{Estimate of Period and Angular Velocity}
 
@@ -173,5 +163,32 @@ The observations of \textit{Starlink-3988} were performed over three separate pa
 \section{Visualisation}
 
 \printbibliography
+
+\newpage
+\appendix
+\section{Appendix} \label{Appendix}
+
+\begin{table}[H]
+    \centering
+    \caption{Comparison data from the In The Sky website}
+    \label{tab:method1_data_comparison}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        \textbf{Date} & \textbf{Time} & \textbf{Azimuth} & \textbf{Elevation} & \textbf{Right} & \textbf{Declination} \\ 
+        \textbf{ } & \textbf{ } & \textbf{(°)} & \textbf{Angle (°)} & \textbf{Ascension (°)} & \textbf{(°)} \\ \hline
+        \multicolumn{6}{|c|}{\textbf{Observation 1}} \\ \hline
+        10/19 & 19:39:15 & 321.0 & 10.0 & 189.3 & 43.8 \\ \hline
+        10/19 & 19:40:00 & 324.5 & 13.9 & 189.5 & 49.3 \\ \hline
+        10/19 & 19:41:00 & 333.4 & 21.7 & 188.3 & 60.8 \\ \hline
+        10/19 & 19:42:00 & 350.5 & 32.1 & 175.8 & 78.7 \\ \hline
+        10/19 & 19:43:00 & 024.8 & 41.0 & 029.8 & 71.3 \\ \hline
+        10/19 & 19:44:00 & 061.3 & 37.0 & 023.0 & 43.0 \\ \hline
+        10/19 & 19:45:00 & 084.6 & 26.1 & 022.3 & 20.4 \\ \hline
+        10/19 & 19:46:00 & 096.2 & 16.9 & 022.8 & 06.3 \\ \hline
+        10/19 & 19:46:29 & 102.5 & 10.2 & 023.8 & -03.7 \\ \hline
+    \end{tabular}
+\end{table}
+
 
 \end{document}
