@@ -50,15 +50,13 @@ This project aims to investigate the orbit of an active, Earth-orbiting Starlink
 
 \begin{figure}[h!]
     \centering
-
-    % First subfigure (left image)
+    
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{LaTeX/Figures/satellite_render.png}
         \caption{3D render of a Starlink v1.5 satellite~\cite{wikimedia_starlink_01_2025}.}
         \label{fig:satellite_render}
-    \end{subfigure}\hfill % No blank line between subfigures
-    % Second subfigure (right image)
+    \end{subfigure}\hfill
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{LaTeX/Figures/satellite_antennas.png}
@@ -112,7 +110,7 @@ The results from the two methods were then compared and one of the two results w
 
 The observations of \textit{Starlink-3988} for Method 1 were performed over two separate passes above the Princeton University Art Museum, New Jersey, United States, on 19 October 2025, using a combination of qualitative and quantitative tracking techniques. The \textit{Satellite Tracker} Android application (Vito Technology) was employed for qualitative tracking of the satellite in the night sky. We first used the app to obtain a prediction of the time of appearance of the satellite above the horizon. Then, the app was used to record both the time of appearance and disappearance of the satellite above and below the horizon. On the same Android phone, time was tracked to record the precise moment each integer minute would elapse. Concurrently, the \textit{Satellite Tracker Pro} iOS application (Kornienko Vyacheslav) was used on a separate Apple phone for quantitative measurements. In coordination with time tracking from the Android phone, we logged values of Azimuth and Elevation Angles, as well as the Distance from the observer to the satellite, through consecutive screenshots. By avoiding hand logging the data in real time, the three measurements were simultaneous, and, thus, any potential transient deviation was eliminated. The operation required two mobile phones and two people (the second person involved was my roomate, Tomás Consonni, an Economics student who kindly provided access to his iPhone). All times were logged in Eastern Daylight Time (EDT).
 
-The observed Azimuth and Elevation Angles, measured from the Earth's surface, were converted to Right Ascension ($\alpha$) and Declination ($\delta$). This transformation to the equatorial coordinate system, which is relative to the Earth's barycenter, was performed using a Python script provided by the course preceptors. We input the coordinates of our observation station as \SI{40.3463}{\degree}N, \SI{-74.6580}{\degree}E, GMT-04:00. This code also uses the distance to the satellite as an additional input. The raw data are presented in Table~\ref{tab:method1_data} below.
+The observed Azimuth and Elevation Angles, measured from the Earth's surface, were converted to Right Ascension ($\alpha$) and Declination ($\delta$). This transformation to the equatorial coordinate system, which is relative to the Earth's barycenter, was performed using a Python script provided by the course preceptors. We input the coordinates of our observation station as \SI{40.3463}{\degree}N, \SI{-74.6580}{\degree}E, GMT-04:00. This code also uses the distance to the satellite as an additional input. The raw data are presented in Table~\ref{tab:method1_data} below. Screenshots of the two apps for the very last measurement on the second observation (10/20 at 19:38:16) are displayed in Appendix~\ref{Appendix}.
 
 \begin{table}[H]
     \centering
@@ -122,33 +120,61 @@ The observed Azimuth and Elevation Angles, measured from the Earth's surface, we
     \begin{tabular}{|c|c|c|c|c|c|c|}
         \hline
         \textbf{Date} & \textbf{Time} & \textbf{Azimuth} & \textbf{Elevation} & \textbf{Distance} & \textbf{Right} & \textbf{Declination} \\ 
-        \textbf{ } & \textbf{ } & \textbf{(°)} & \textbf{Angle (°)} & \textbf{(km)} & \textbf{Ascension (°)} & \textbf{(°)} \\ \hline
+        \textbf{(2025)} & \textbf{(EDT)} & \textbf{(°)} & \textbf{Angle (°)} & \textbf{(km)} & \textbf{Ascension (°)} & \textbf{(°)} \\ \hline
         \multicolumn{7}{|c|}{\textbf{Observation 1 – 19 October 2025}} \\ \hline
-        10/19 & 21:18:49 & 287.6 & 10.2 & 1628 &  &  \\ \hline
-        10/19 & 21:19:00 & 286.3 & 11.0 & 1576 &  &  \\ \hline
-        10/19 & 21:20:00 & 273.1 & 17.9 & 1226 &  &  \\ \hline
-        10/19 & 21:21:00 & 262.7 & 21.8 & 1083 &  &  \\ \hline
-        10/19 & 21:22:00 & 241.0 & 26.3 &  954 &  &  \\ \hline
-        10/19 & 21:23:00 & 213.6 & 25.9 &  541 &  &  \\ \hline
-        10/19 & 21:24:00 & 190.3 & 20.2 & 1137 &  &  \\ \hline
-        10/19 & 21:25:00 & 176.0 & 13.7 & 1419 &  &  \\ \hline
-        10/19 & 21:25:38 & 169.3 & 10.1 & 1657 &  &  \\ \hline
+        10/19 & 21:18:49 & 287.6 & 10.2 & 1628 & 315.8 & 42.8 \\ \hline
+        10/19 & 21:19:00 & 286.3 & 11.0 & 1576 & 316.5 & 42.5 \\ \hline
+        10/19 & 21:20:00 & 273.1 & 17.9 & 1226 & 321.0 & 39.9 \\ \hline
+        10/19 & 21:21:00 & 262.7 & 21.8 & 1083 & 323.4 & 38.5 \\ \hline
+        10/19 & 21:22:00 & 241.0 & 26.3 &  954 & 326.5 & 36.3 \\ \hline
+        10/19 & 21:23:00 & 213.6 & 25.9 &  541 & 331.7 & 36.5 \\ \hline
+        10/19 & 21:24:00 & 190.3 & 20.2 & 1137 & 333.0 & 31.2 \\ \hline
+        10/19 & 21:25:00 & 176.0 & 13.7 & 1419 & 336.0 & 28.5 \\ \hline
+        10/19 & 21:25:38 & 169.3 & 10.1 & 1657 & 338.0 & 26.5 \\ \hline
         \multicolumn{7}{|c|}{\textbf{Observation 2 – 20 October 2025}} \\ \hline
-        10/20 & 19:31:03 & 319.7 & 10.5 & 1636 &  &  \\ \hline
-        10/20 & 19:32:00 & 325.7 & 17.5 & 1264 &  &  \\ \hline
-        10/20 & 19:33:00 & 337.5 & 28.0 &  930 &  &  \\ \hline
-        10/20 & 19:34:00 & 006.1 & 42.2 &  694 &  &  \\ \hline
-        10/20 & 19:35:00 & 056.7 & 43.7 &  677 &  &  \\ \hline
-        10/20 & 19:36:00 & 088.6 & 29.9 &  886 &  &  \\ \hline
-        10/20 & 19:37:00 & 101.9 & 18.6 & 1216 &  &  \\ \hline
-        10/20 & 19:38:00 & 108.3 & 11.3 & 1579 &  &  \\ \hline
-        10/20 & 19:38:16 & 109.5 & 09.8 & 1675 &  &  \\ \hline
+        10/20 & 19:31:03 & 319.7 & 10.5 & 1636 & 294.0 & 49.7 \\ \hline
+        10/20 & 19:32:00 & 325.7 & 17.5 & 1264 & 299.3 & 48.2 \\ \hline
+        10/20 & 19:33:00 & 337.5 & 28.0 &  930 & 304.2 & 46.4 \\ \hline
+        10/20 & 19:34:00 & 006.1 & 42.2 &  694 & 308.9 & 44.4 \\ \hline
+        10/20 & 19:35:00 & 056.7 & 43.7 &  677 & 313.2 & 42.2 \\ \hline
+        10/20 & 19:36:00 & 088.6 & 29.9 &  886 & 317.2 & 39.9 \\ \hline
+        10/20 & 19:37:00 & 101.9 & 18.6 & 1216 & 321.0 & 37.4 \\ \hline
+        10/20 & 19:38:00 & 108.3 & 11.3 & 1579 & 324.4 & 34.9 \\ \hline
+        10/20 & 19:38:16 & 109.5 & 09.8 & 1675 & 325.3 & 34.3 \\ \hline
     \end{tabular}
 \end{table}
 
 In preparation for the real observation, a test logging of data was also performed using the \textit{In The Sky} website. These data can be found in Appendix~\ref{Appendix} and do not contain distance to satellite entries.
 
 \subsection{Method 4}
+
+For the implementation of Method 4, we employed a similar experimental setup. Observations were conducted from Princeton University Art Museum, New Jersey, United States, during 21 October 2025. The \textit{Satellite Tracker Pro} iOS application (Kornienko Vyacheslav) was once again employed for quantitative tracking, while the iPhone’s built-in screen recording feature was activated overnight to capture the full sequence of satellite passes automatically. The recorded footage was later analysed to extract precise timestamps at which the satellite crossed a constant elevation angle during each pass. By repeating this process several times, a consistent dataset was obtained without the need for manual data entry, thereby reducing human timing errors. All times were recorded in Eastern Daylight Time (EDT), and each entry includes the corresponding distance from the observer to the satellite as provided by the application (to give an idea of which side of the earth the satellite was on). The elapsed times between consecutive passes at the same elevation will be used to estimate the orbital period. The raw data are to be entered in Table~\ref{tab:method4_data} below.
+
+\begin{table}[H]
+    \centering
+    \caption{Raw empirical data for Method 4 observations}
+    \label{tab:method4_data}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{Date (2025)} & \textbf{Time (EDT)} & \textbf{Elevation Angle (°)} & \textbf{Latitude (°N)} & \textbf{Longitude (°E)} \\ \hline
+        \multicolumn{5}{|c|}{\textbf{Observations – 21 October 2025}} \\ \hline
+        10/21 & 15:10:29 & -80.0 & -43.63 & 79.67\\ \hline
+        10/21 & 16:49:20 & -80.0 & -58.24 & 72.31\\ \hline
+        10/21 & & & & \\ \hline
+        10/21 & & & & \\ \hline
+        10/21 & & & & \\ \hline
+        10/21 & & & & \\ \hline
+        10/21 & & & & \\ \hline
+        10/21 & & & & \\ \hline
+        10/21 & & & & \\ \hline
+        10/21 & & & & \\ \hline
+    \end{tabular}
+\end{table}
+
+
+
+
 
 \section{Estimate of Period and Angular Velocity}
 
@@ -167,6 +193,26 @@ In preparation for the real observation, a test logging of data was also perform
 \newpage
 \appendix
 \section{Appendix} \label{Appendix}
+
+Screenshots of the mobile apps used for the observations. The screenshots show the last observation taken on 10/20, and are labelled to distinguish them from other similar screenshots. Figure~\ref{fig:tracker_screenshot} shows the Satellite Tracker mobile app in use on a Samsung Galaxy S24 Ultra. Figure~\ref{fig:tracker_pro_screenshot} shows the Satellite Tracker Pro app in use on an iPhone 12.
+
+\begin{figure}[h!]
+    \centering
+
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{LaTeX/Figures/Satellite_Tracker_Screenshot.jpg}
+        \caption{Satellite Tracker app}
+        \label{fig:tracker_screenshot}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{LaTeX/Figures/Satellite_Tracker_Pro_Screenshot.jpg}
+        \caption{Satellite Tracker Pro app}
+        \label{fig:tracker_pro_screenshot}
+    \end{subfigure}
+    
+\end{figure}
 
 \begin{table}[H]
     \centering
