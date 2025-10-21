@@ -7,15 +7,15 @@ import warnings
 warnings.filterwarnings('ignore')   
 # ^ Not really advisable to do, in general
 
-peyton_hall = EarthLocation(lat=40.346422*u.deg, lon=-74.651648*u.deg, height=43*u.m) # Peyton Hall, ground level
+peyton_hall = EarthLocation(lat=40.3463*u.deg, lon=-74.6580*u.deg, height=30*u.m) # Peyton Hall, ground level
 utc_offset = -4 * u.hour # Eastern Daylight Time
 
 
 # ENTER TIMES OF OBSERVATIONS (one for each alt/az measurement)
-times = Time(['2023-10-4 17:05:30', '2023-10-4 17:10:30']) - utc_offset
-alt_angles = u.deg * [1, 17]                               # ENTER ALTITUDE (ELEVATION) ANGLE (degrees above your horizon)
-az_angles = u.deg * [313,26]                               # ENTER AZIMUTH ANGLE (degrees clockwise from your geographic north)
-obs_dist = u.km * [2235,1128]                               # ENTER RANGE (km distance b/w you and the satellite at time of obsv.)
+times = Time(['2025-10-20 19:32:00', '2025-10-20 19:38:00']) - utc_offset
+alt_angles = u.deg * [17.5, 11.3]                               # ENTER ALTITUDE (ELEVATION) ANGLE (degrees above your horizon)
+az_angles = u.deg * [325.7, 108.3]                               # ENTER AZIMUTH ANGLE (degrees clockwise from your geographic north)
+obs_dist = u.km * [1264, 1579]                               # ENTER RANGE (km distance b/w you and the satellite at time of obsv.)
 
 sat_altaz = AltAz(alt = alt_angles, az = az_angles, distance=obs_dist, obstime = times, location = peyton_hall)
 sat_GCRS = sat_altaz.transform_to(GCRS(obstime=times))

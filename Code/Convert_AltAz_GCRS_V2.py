@@ -20,12 +20,12 @@ sat_altaz = AltAz(alt = alt_angles, az = az_angles, distance=obs_dist, obstime =
 sat_ITRS_topocentric = ITRS(sat_altaz.spherical, obstime=time)
 ITRS_geo_coords = sat_ITRS_topocentric.cartesian + peyton_hall.get_itrs(time).cartesian
 sat_ITRS_geo = ITRS(ITRS_geo_coords, representation_type='cartesian')
-sat_GCRS = sat_ITRS_geo.transform_to(GCRS)
+sat_GCRS = sat_ITRS_geo.transform_to(GCRS(obstime=time))
 
 
 
 print("    RA (deg)      Dec (deg),   Radius (km)") 
 for x in range(len(alt_angles)):
     temp = str(sat_GCRS.spherical[x])[1:-16]
-    print(f"{x+1}   {temp:20}") 
+    print(f"{x+1}   {temp:20}")
 
