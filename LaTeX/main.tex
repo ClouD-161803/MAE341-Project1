@@ -13,7 +13,7 @@
 
 \maketitle
 
-\section{Introduction \& Satellite Selection}
+\section{Introduction \& Satellite Selection} \label{sec:intro}
 
 Since the first successful deployment of a human-made object into Earth's orbit with \textit{Sputnik 1} in 1957, over 15,000 satellites have been placed in orbit around our planet~\cite{lookup-lepoint2025}. Of these, more than 13,000 remain operational today, and this unprecedented active percentage is continuously growing. The vast majority are of American origin (roughly \SI{74}{\percent}), and most belong to SpaceX's Starlink constellation, which alone accounts for approximately \SI{86}{\percent} of all U.S. satellites and \SI{64}{\percent} of the world's total active population. Engineered to provide high-speed, low-latency internet connectivity to underserved rural areas of the world for a moderate service price, Starlink has been rapidly expanding its constellation, with thousands of new satellites being launched every year through proprietary SpaceX vehicles.
 
@@ -24,7 +24,7 @@ Since the first successful deployment of a human-made object into Earth's orbit 
     \label{fig:constellation}
 \end{figure}
 
-These satellites have already been used for several key applications, including enabling WiFi connectivity in commercial airlines and cruises, providing life-critical broadband in hurricane-ravaged coastal towns and earthquake-shaken regions, and facilitating allied command and control operations in the Russo-Ukrainian War. The constellation includes nearly 9,700 satellites (as of the writing of this report), and is visualised in Figure~\ref{fig:constellation}. Each unit is equipped with four beamforming, phased array antennas, each of which electronically steers the \SI{11.7}{\giga\hertz} collimated downlink signals in real time to a \SI{24}{\kilo\metre}-diameter ground coverage cell that can serve up to 8,000 simultaneous customers. Furthermore, the satellites communicate with one another via five on-board optical lasers at vacuum light-speed, enabling lower effective latencies between far-away cities compared to underwater cables. This is particularly relevant for applications in stock market trading, where saving a few milliseconds in latency can have a huge impact on the decision-making reactions to market fluctuations. To add to the list of groundbreaking engineering innovations that SpaceX developed for Starlink satellites, the orbital insertion procedure is entirely novel: the satellites are deployed in clusters of up to 23 units\footnote{For the larger v2 model, down from up to 60 units of the smaller v1/v1.5 model} at an altitude of roughly \SI{280}{\kilo\metre}, as shown in Figure~\ref{fig:starlink_cluster}; their orbits are then slowly raised to around \SI{550}{\kilo\metre} in two stages using Kripton gas ion thrusters\footnote{This is a more cost-efficient alternative to the customary option, Xenon gas}. This unusual manoeuvre leaves the satellites bunched up in characteristic lines before successful insertion, which can be observed from the surface of the Earth as shown in Figure~\ref{fig:starlink_line}.
+These satellites have already been used for several key applications, including enabling WiFi connectivity in commercial airlines and cruises, providing life-critical broadband in hurricane-ravaged coastal towns and earthquake-shaken regions, and facilitating allied command and control operations in the Russo-Ukrainian War. The constellation includes nearly 9,700 satellites (as of the writing of this report), and is visualised in Figure~\ref{fig:constellation}. Each unit is equipped with four beamforming, phased array antennas, each of which electronically steers the \SI{11.7}{\giga\hertz} collimated downlink signals in real time to a \SI{24}{\kilo\metre}-diameter ground coverage cell that can serve up to 8,000 simultaneous customers. Furthermore, the satellites communicate with one another via five on-board optical lasers at vacuum light-speed, enabling lower effective latencies between far-away cities compared to underwater cables. This is particularly relevant for applications in stock market trading, where saving a few milliseconds in latency can have a huge impact on the decision-making reactions to market fluctuations. To add to the list of groundbreaking engineering innovations that SpaceX developed for Starlink satellites, the orbital insertion procedure is entirely novel: the satellites are deployed in clusters of up to 23 units\footnote{For the larger v2 model, down from up to 60 units of the smaller v1/v1.5 model} at an altitude of roughly \SI{280}{\kilo\metre}, as shown in Figure~\ref{fig:starlink_cluster}; their orbits are then slowly raised to around \SI{550}{\kilo\metre} in two stages using Krypton gas ion thrusters\footnote{This is a more cost-efficient alternative to the customary option, Xenon gas}. This unusual manoeuvre leaves the satellites bunched up in characteristic lines before successful insertion, which can be observed from the surface of the Earth as shown in Figure~\ref{fig:starlink_line}.
 
 \begin{figure}[h!]
     \centering
@@ -105,7 +105,7 @@ The observed Azimuth and Elevation Angles, measured from the Earth's surface, we
 
 \begin{table}[H]
     \centering
-    \caption{Raw empirical data for Method 1 observations}
+    \caption{Raw empirical data for Method 1 observations.}
     \label{tab:method1_data}
     \renewcommand{\arraystretch}{1.2}
     \begin{tabular}{|c|c|c|c|c|c|c|}
@@ -143,7 +143,7 @@ For the implementation of Method 4, we employed a similar experimental setup. Ob
 
 \begin{table}[H]
     \centering
-    \caption{Raw empirical data for Method 4 observations}
+    \caption{Raw empirical data for Method 4 observations.}
     \label{tab:method4_data}
     \renewcommand{\arraystretch}{1.2}
     \begin{tabular}{|c|c|c|c|c|}
@@ -162,7 +162,7 @@ For the implementation of Method 4, we employed a similar experimental setup. Ob
 
  The \textit{N2YO} website (\href{https://www.n2yo.com}{https://www.n2yo.com}) was employed for quantitative tracking: we screen-recorded a portion of the website containing data about time, Elevation Angle, latitude and longitude over several hours of time on two separate days. The recorded footage was later analysed to extract precise timestamps at which the satellite crossed a constant elevation angle during each pass. By employing this technique, a consistent dataset was obtained without the need for manual data entry, thereby reducing human timing errors. An example screenshot of the data obtained from the screen recording is displayed in Appendix~\ref{Appendix}. All times were recorded in Eastern Daylight Time (EDT). The elapsed times between consecutive passes at the same elevation will be used to estimate the orbital period. The raw data are summarised in Table~\ref{tab:method4_data}.
 
-\section{Estimate of Period and Angular Velocity}
+\section{Estimate of Period and Angular Velocity} \label{first_estimates_and_assumptions}
 
 The purpose of this section is to calculate orbital period and angular velocity for the \textit{Starlink-3988} satellite using the data presented in Section~\ref{sec:data}. All calculations were performed using \texttt{Python}, and scripts can be found at the supporting repository:
 \begin{center}
@@ -403,16 +403,17 @@ Method~4 produced a mean $\bar{\tau}_{4}=\SI{100.0}{\minute}$ (error vs.\ publis
 
 Keeping index~1 excluded from the dataset, we also computed the corresponding mean angular velocity, defined as \[ \omega = \frac{2\pi}{\tau}. \] Using the refined mean orbital period $\bar{\tau}_{\text{refined}} = \SI{94.47}{\minute}$, the resulting mean angular velocity is \[ \bar{\omega}_{\text{refined}} = \frac{2\pi}{94.47\times60} = \SI{0.001108}{\radian\per\second} = \SI{0.06347}{\degree\per\second}. \] The uncertainty in $\omega$ measurement arises from the propagation of the period uncertainty, $\sigma_{\tau,\text{refined}} = \SI{0.46}{\minute}$, through the inverse relationship $\omega \propto 1/\tau$, and is also very small, indicating internal consistency.
 
-We adopt the refined values from Method~1,
+We adopt the refined values from Method~1:
 \[
+    \boxed{
     \bar{\tau}_{\text{refined}} = \SI{94.47}{\minute}, \qquad 
-    \bar{\omega}_{\text{refined}} = \SI{1.108e-3}{\radian\per\second},
+    \bar{\omega}_{\text{refined}} = \SI{1.108e-3}{\radian\per\second}}
 \]
 as the definitive parameters for all subsequent orbital calculations in this report.
 
 \section{Estimate of Semi-Major Axis and Position Prediction}
 
-The remainder of this report is concerned with the evaluation of orbital elements for the orbit of the \textit{Starlink-3988} satellite. In general, orbital elements are a set of parameters that fully define the shape of a satellite's orbit around a central body, as well as the position of the satellite along the orbit, effectively nailing the location of the satellite in 3D space at a given time relative to a given reference frame. The most common set of orbital parameters to describe orbits of satellites around the Earth is that of the six orbital elements: eccentricity ($e$), semi-major axis ($a$), inclination ($i$), longitude of the ascending node ($\Omega$), argument of periapsis ($\omega$), and true anomaly ($\theta$). For reference and comparison, the ground truth TLE values for the \textit{Starlink-3988} satellite are given in Table~\ref{tab:starlink3988_orbit}. These were taken from the \textit{N2YO} website, and a full explanation of how we converted the raw TLEs to the values in the table is given in Appendix~\ref{AppendixB}. In this section, we will evaluate the semi-major axis, and carry out a point prediction of the position of the satellite in the future, and compare our results to the ground truth values from Table~\ref{tab:starlink3988_orbit}.
+The remainder of this report is concerned with the evaluation of orbital elements for the orbit of the \textit{Starlink-3988} satellite. In general, orbital elements are a set of parameters that fully define the shape of a satellite's orbit around a central body, as well as the position of the satellite along the orbit, effectively nailing the location of the satellite in 3D space at a given time relative to a given reference frame. The most common set of orbital parameters to describe orbits of satellites around the Earth is that of the six orbital elements: eccentricity ($e$), semi-major axis ($a$), inclination ($i$), longitude (right ascension) of the ascending node ($\Omega$), argument of periapsis ($\omega$), and true anomaly ($\theta$). For reference and comparison, the ground truth TLE values for the \textit{Starlink-3988} satellite are given in Table~\ref{tab:starlink3988_orbit}. These were taken from the \textit{N2YO} website, and a full explanation of how we converted the raw TLEs to the values in the table is given in Appendix~\ref{AppendixB}. In this section, we will evaluate the semi-major axis, and carry out a point prediction of the position of the satellite in the future, and compare our results to the ground truth values from Table~\ref{tab:starlink3988_orbit}.
 
 \begin{table}[h]
     \centering
@@ -481,7 +482,7 @@ corresponding to a relative error of:
 \]
 This small deviation is well within experimental uncertainty and primarily arises from limited precision in the timing of orbital passes, as well as the simplifying assumption of a perfectly circular orbit ($e \approx 0$), which neglects the satellite’s small but nonzero eccentricity.
 
-\subsection{Position Prediction via Kepler’s Equation}
+\subsection{Position Prediction via Kepler’s Equation} \label{sec:mean_anomaly}
 
 Having determined the orbital period $\tau$ and semi-major axis $a$, we can predict the satellite’s position along its orbit at any future time using Kepler’s equation:
 \begin{equation}
@@ -543,36 +544,289 @@ M_{\text{TLE}} = \SI{265.1064}{\degree}.
 \]
 The absolute angular difference between the propagated value and the table value is:
 \[
-\Delta M = |\bar{M}_{e} - M_{\text{TLE}}| = \SI{56.4441}{\degree},
+\Delta M_e = |\bar{M}_{e} - M_{\text{TLE}}| = \SI{56.4441}{\degree},
 \]
 which corresponds to a relative error of:
 \[
-\frac{\Delta M}{M_{\text{TLE}}}\times 100 \approx \SI{21.29}{\percent}.
+\frac{\Delta M_e}{M_{\text{TLE}}}\times 100 \approx \SI{21.29}{\percent}.
 \]
 
 This percentage error is almost two orders of magnitude higher than the error on the orbital period. This is likely due to the fact that the prediction above makes several simplifying assumptions and choices that limit its accuracy and reliability. The assumption of a circular orbit ($e \approx 0$) neglects the very small but finite eccentricity of the Starlink orbit, introducing a small error in the mapping between mean, eccentric, and true anomalies. Additionally, the period $\bar{\tau}$ used here represents an averaged value derived from visual observations and thus carries its own uncertainty. Over the course of many revolutions, even a slight error in $\tau$ accumulates and produces a measurable phase drift. Uncertainties in timing and small rounding errors in recorded observation times further amplify this effect. Finally, the model neglects all perturbative forces, which can give rise to further discrepancies. While this simplified circular-orbit model captures the correct order of magnitude of the satellite’s angular advance, it demonstrates the limitations of purely observational timing methods for long-term propagation.
 
 \section{Estimate of Orbital Elements} \label{sec:orbital_elements}
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=\linewidth]{LaTeX/Figures/change_in_orbital_parameters.png}
-%     \caption{Caption}
-%     \label{fig:placeholder}
-% \end{figure}
+In this section, we evaluate the remaining orbital elements and compare the results to TLE data from Table~\ref{tab:starlink3988_orbit}.
 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=\linewidth]{LaTeX/Figures/Orbit-Data-Starlink-3988.png}
-%     \caption{Caption}
-%     \label{fig:placeholder}
-% \end{figure}
+\subsection{Eccentricity} \label{sec:eccentricity}
+The eccentricity of a planar orbit defines the oblateness of the shape the satellite traces out over time. As a dimensionless ratio between the focal distance and the semi-major axis, it can take any non-negative value. Different values of eccentricity describe different orbital shapes: values of $e \in [0, 1)$ describe \emph{closed} orbits, i.e. orbits for which the satellite remains bound to the central body, and values of $e \in [1, \infty)$ describe \emph{open} orbits, where the orbiting body eventually escapes the gravitational field of its attractor. Within these two families, closed orbits are further subdivided into circles ($e = 0$) and ellipses ($e \in (0, 1)$), and open orbits in parabolas ($e =1$) and hyperbolas ($e \in (1, \infty)$). In the absolute limits, we can also have straight line orbits, which are closed if the line is parallel to the position vector and open if the line is perpendicular to the position vector. However, neither of these cases, nor circular and parabolic orbits, can be achieved in practice, as they require exact values of eccentricity and energy (although one could make quantum-mechanical arguments about this). For an unperturbed two-body problem, eccentricity is defined as:
 
-\section{Error Analysis}
+\[
+\ e \;:=\; \sqrt{\,1 + \dfrac{2\,E\,H^2}{mk^2}\,}\ ,
+\]
+
+where $E$ is orbit energy, $H$ is angular momentum, $m$ is the satellte's mass and $k := GMm = \mu m$ is a gravitational constant. Using specific angular momentum $h := H/m$ and specific energy $\mathcal{E}:= E/m$, this expression can be rewritten as:
+
+\[
+e \;=\; \sqrt{\,1 + \dfrac{2\,\mathcal{E}\,h^2}{\mu^2}\,}\,.
+\]
+
+For a planar orbit, the specific energy and specific angular momentum are defined by:
+\[
+\mathcal{E} = \frac{v^2}{2} - \frac{\mu}{r}, \qquad h = r^2 \omega,
+\]
+where $v$ is the instantaneous velocity, $r$ the distance from the Earth’s center, and $\omega$ the angular velocity of the satellite.  
+Substituting these relations into the eccentricity definition and simplifying yields:
+
+\[
+e = \sqrt{\,1 + \dfrac{2\!\left(\frac{v^2}{2} - \frac{\mu}{r}\right)r^4 \omega^2}{\mu^2}\,} = \sqrt{\,1 - \dfrac{r^4 \omega^2}{a \mu}\,},
+\]
+where the last equality follows from replacing $\mathcal{E} = -\mu/(2a)$, with $a$ the semi-major axis of the orbit.  In the special case of nearly circular orbits the orbital radius and semi-major axis are equivalent. This allows us to write:
+\[
+e  = \sqrt{\,1 - \dfrac{a^3 \omega^2}{\mu}\,}\
+\]
+
+Substituting the experimentally determined parameters:
+\[
+\bar{a} = 6938~\mathrm{km}, \qquad
+\bar{\omega} = 1.108\times10^{-3}~\mathrm{rad\,s^{-1}}
+\]
+we obtain:
+\[
+1- \frac{\bar{a}^{3}\bar{\omega}^{2}}{\mu}
+= 1- \frac{(6938)^{3}(1.108\times10^{-3})^{2}}{398574}
+= - 0.0296.
+\]
+This would give a radicand of a negative sign. The negative sign has no physical meaning, since eccentricity is inherently non-negative (and certainly non-imaginary). This result likely derives from numerical error in the values of angular velocity and semi-major axis. We will circumvent the presence of this negative sign by making use of a binomial approximation:
+\[
+\,\bar{e} = \sqrt{\,1 - \dfrac{\bar{a}^3 \bar{\omega}^2}{\mu}\,} \approx 1 - \frac{1}{2}\dfrac{\bar{a}^3 \bar{\omega}^2}{\mu}  = 0.0148
+\]
+For comparison, the reference TLE value from Table~\ref{tab:starlink3988_orbit} is:
+\[
+ \,e_{\mathrm{TLE}} = 0.0001133.\,
+\]
+
+The difference between the two estimates is therefore:
+\[
+\Delta e = |\bar{e}| - e_{\mathrm{TLE}} = 0.0148 - 0.0001133 = 0.0147,
+\]
+which corresponds to a relative deviation of:
+\[
+\frac{|\Delta e|}{e_{\mathrm{TLE}}}\times100 \approx 1.3\times10^{4}\%.
+\]
+
+This large fractional discrepancy does not imply an incorrect orbital model, but rather reflects the difficulty of estimating an extremely small quantity ($e \sim 10^{-4}$) from experimentally derived parameters that have fractional uncertainties at the level of $10^{-3}$ to $10^{-2}$.  
+Because eccentricity depends on the third power of $a$ and the square of $\omega$, even small absolute errors in these quantities propagate nonlinearly and dominate the result.  
+Linearising the ratio $R = a^{3}\omega^{2}/\mu$, the fractional uncertainty is:
+\[ \frac{\delta R}{R} \approx 3\frac{\delta a}{a} + 2\frac{\delta \omega}{\omega}.
+\]
+Using $\delta a = 21~\mathrm{km}$ ($\delta a/a = 0.00303$) and $\delta\omega/\omega = 0.00487$ (from $\pm0.46$~min timing uncertainty in Section~\ref{sec:data}), we find:
+\[
+\frac{\delta R}{R} = 0.0188,
+\]
+so:
+\[
+\delta R = R\cdot 0.0188 = 1.0296\times 0.0188 = 0.01935.
+\]
+Since \(\bar{e}=\sqrt{|1-R|}\), the uncertainty propagates (magnitude) approximately as:
+\[
+\delta\bar{e} \approx \frac{\delta R}{2\bar{e}} \approx 0.0194,
+\]
+
+Thus, our observational estimate can be expressed as:
+\[
+\boxed{\,\bar{e} = 0.0148 \pm 0.0194\,}
+\]
+
+Given that the uncertainty is comparable to (and in this case smaller than) the estimate itself but far larger than the catalog eccentricity, the result is not evidence of a genuinely large eccentricity: rather it shows that our measurement precision cannot resolve the TLE-level eccentricity. This confirms that, within experimental precision, the orbit of \textit{Starlink-3988} is effectively circular, and the assumption $e \approx 0$ made throughout this report remains well justified.
+
+However, it also demonstrates that our point estimate of eccentricity is not reliable. For this value, a more sophisticated method should be adopted. As an example, one could record manually the perigee and apogee altitudes and, after evaluating the respective radii, evaluate the eccentricity using $e = \frac{r_a -r_p}{r_a + r_p}$. This is difficult to perform using the mobile apps adopted for this report, as there is no a priori indication of when perigee and apogee will be reached by the satellite. Therefore, this refinement to the estimate is left as a suggested improvement for future attempts.
+
+\subsection{Inclination}
+
+The inclination of an orbit, denoted by $i$, quantifies the tilt of the orbital plane with respect to the reference plane of the central body, which for Earth is its equatorial plane. As an angular measure, inclination defines the orientation of the orbital plane in three-dimensional space and is expressed in degrees. Its value ranges from $0^{\circ}$ to $180^{\circ}$ and determines both the direction and type of motion of the satellite around Earth. Orbits with $i \in [0^{\circ}, 90^{\circ})$ are termed \emph{prograde}, meaning the satellite moves in the same direction as the Earth's rotation, whereas those with $i \in (90^{\circ}, 180^{\circ}]$ are \emph{retrograde}, moving opposite to the Earth's rotation. A satellite in an equatorial orbit has $i = 0^{\circ}$ (prograde) or $i = 180^{\circ}$ (retrograde), while a satellite with $i = 90^{\circ}$ follows a \emph{polar orbit}, passing directly above both the North and South poles on each revolution.  Inclination fundamentally determines the range of latitudes over which a satellite travels: the maximum latitude reached is numerically equal to the inclination angle itself. This makes $i$ a very important parameter for defining a satellite’s ground track and its coverage characteristics. For example, low-inclination orbits are optimal for equatorial coverage, while high-inclination orbits are required for global or near-global observation missions.  
+
+In practice, the inclination is determined geometrically as the angle between the orbital angular momentum vector $\mathbf{h}$ and the unit vector normal to the equator, $\hat{\mathbf{k}}$. In vector form,
+\begin{equation}
+    \label{eq:inclination}
+    i = \cos^{-1}\!\left(\frac{\mathbf{h}\cdot\hat{\mathbf{k}}}{|\mathbf{h}|}\right),
+\end{equation}
+where $\hat{\mathbf{k}}$ is the unit vector pointing along the positive Earth-rotation axis. Equivalently, when the instantaneous direction of the satellite is observed from a single station and reported in terms of azimuth $\alpha$ and elevation $\varepsilon$, a convenient formula to compute inclination is:
+\[
+i = \cos^{-1}\!\big(\sin\alpha\cos\varepsilon\big).
+\]
+
+Taking the measured values from the row
+\texttt{10/20 \& 19:35:00 \& 056.7 \& 43.7 \& 677 \& 313.2 \& 42.2} in Table~\ref{tab:method1_data}, we use
+\[
+\bar{\alpha} = 56.7^\circ,\qquad \bar{\varepsilon} = 43.7^\circ,
+\]
+(note: trig functions are evaluated in radians). Substituting these estimated values gives
+
+\[
+\,\bar{i} = \cos^{-1}\!\big(\sin\bar{\alpha}\,\cos\bar{\varepsilon}\big)
+= \cos^{-1}\!\big(\sin 56.7^\circ\cos 43.7^\circ\big)
+= 52.82^\circ\,.
+\]
+
+To assess measurement uncertainty, consider the resolution of the \textit{Satellite Tracker Pro} app, which on average had update angles of \(\delta\alpha=\delta\varepsilon=0.5^\circ\). As a simple uncertainty quantification assessment, consider the linear propagation of uncertainty through:
+\(f(\alpha,\varepsilon)=\sin\alpha\cos\varepsilon\) and \(i=\arccos f\), which gives:
+\[
+\sigma_i \approx \sqrt{\Big(\frac{\partial i}{\partial\alpha}\,\delta\alpha\Big)^2 + \Big(\frac{\partial i}{\partial\varepsilon}\,\delta\varepsilon\Big)^2},
+\]
+with:
+\[
+\frac{\partial i}{\partial\alpha} = -\frac{\cos\alpha\cos\varepsilon}{\sqrt{1-f^2}},\qquad
+\frac{\partial i}{\partial\varepsilon} = \frac{\sin\alpha\sin\varepsilon}{\sqrt{1-f^2}}.
+\]
+Evaluating numerically at \(\bar{\alpha},\bar{\varepsilon}\) (and converting \(\delta\alpha,\delta\varepsilon\) to radians) yields:
+\[
+\sigma_i \approx 0.44^\circ,
+\]
+so the observational result is:
+\[
+\boxed{\bar{i} = 52.82^\circ \pm 0.44^\circ}
+\]
+
+Compare this to the published TLE inclination in Table~\ref{tab:starlink3988_orbit}:
+\[
+i_{\mathrm{TLE}} = 53.2146^\circ.
+\]
+The absolute difference is:
+\[
+\Delta i = |\,\bar{i} - i_{\mathrm{TLE}}\,| \approx 0.39^\circ,
+\]
+which is smaller than the propagated uncertainty of \(\approx0.44^\circ\). This gives a fractional error of:
+
+\[
+\,
+\frac{\Delta i}{i_{\mathrm{TLE}}} \times 100
+= \frac{0.39}{53.2146} \times 100
+= 0.73\%.
+\,
+\]
+
+Thus the single-station azimuth/elevation diagnostic yields an inclination consistent with the TLE value within measurement error. However, it was found that this result is heavily dependent on the choice of observation. A more robust approach for computing the inclination would involve using more sophisticated tracking software to measure the values of $\mathbf{h}$ and $\hat{\mathbf{k}}$ directly, and evaluate the inclination using~\eqref{eq:inclination}. This was determined to be beyond the scope of this report.
+
+\subsection{Right Ascension of the Ascending Node}
+
+The Right Ascension of the Ascending Node (RAAN), denoted by $\Omega$, defines the orientation of the orbital plane with respect to the Earth's equatorial plane and a fixed inertial reference direction, taken as the vernal equinox. It measures, in degrees, the angle between the vernal equinox direction and the line of nodes, which is the intersection of the orbital plane with the equatorial plane. In physical terms, $\Omega$ specifies where in space the satellite crosses the Earth's equator from south to north, marking the ascending node of its orbit. As an angular coordinate, $\Omega$ ranges from $0^{\circ}$ to $360^{\circ}$. A value of $\Omega = 0^{\circ}$ indicates that the ascending node lies exactly along the reference direction of the vernal equinox, while increasing values correspond to eastward rotations of the orbital plane around the Earth's spin axis. Over time, $\Omega$ may slowly drift due to perturbations caused by the Earth's oblateness (the $J_{2}$ effect, named after the second-order, dominant Zonal Harmonic Coefficient in the spherical harmonic series of Earth's geoid model), which induces a precession of the orbital plane about the Earth’s rotation axis. This precession is particularly noticeable for low-Earth orbits, where the effect can amount to several degrees per day depending on altitude and inclination.  
+
+According to the project instructions, the Right Ascension of the Ascending Node is not expected to be determined from ground-based observations alone, as the limited duration of our measurements (spanning only a few days) does not permit the accurate tracking of the slow precessional drift of the orbital plane. Instead, it was recommended to retrieve this parameter directly from the satellite’s Two-Line Element (TLE) data. Following this guidance, we report the catalogue value from Table~\ref{tab:starlink3988_orbit}:
+\[
+\boxed{\,\Omega_{\mathrm{TLE}} = 171.9324^{\circ}\,}.
+\]
+Since $\Omega$ was not derived from our own observational data, no independent error analysis is performed for this parameter.
+
+\subsection{Argument of Perigee} \label{sec:arg_of_perigee}
+
+The argument of perigee, denoted by $\omega$ (not to be confused with angular velocity), specifies the orientation of an elliptical orbit within its orbital plane. It is defined as the angle, measured in the direction of the satellite’s motion, from the ascending node to the point of closest approach to the Earth, known as the perigee. In physical terms, $\omega$ determines where along the orbit the satellite comes nearest to Earth, thereby setting the orientation of the ellipse relative to the line of nodes. For closed orbits, $\omega$ ranges from $0^{\circ}$ to $360^{\circ}$, with $\omega = 0^{\circ}$ meaning that perigee lies exactly on the ascending node, and $\omega = 90^{\circ}$ meaning that perigee lies a quarter of an orbit ahead in the direction of motion. However, in the special case of circular orbits, such as that of \textit{Starlink-3988}, the perigee is not a distinct point—every location on the orbit is at the same radial distance from Earth. Consequently, $\omega$ loses its physical meaning, as there is no unique direction toward which to measure the perigee angle. For this reason, the argument of perigee is still listed here for completeness, but its numerical value for a nearly circular orbit carries no physical significance and can be treated as an arbitrary reference angle. We therefore take the TLE catalogue value directly from Table~\ref{tab:starlink3988_orbit}:
+\[
+\boxed{\,\omega_{\mathrm{TLE}} = 95.0058^{\circ}\,}.
+\]
+As with the Right Ascension of the Ascending Node, no error analysis is provided here since $\omega$ cannot be meaningfully derived from ground-based observational data when $e \approx 0$.
+
+\subsection{True Anomaly and Mean Anomaly} \label{true_anomaly}
+
+The true anomaly, denoted by $\theta$, represents the instantaneous angular position of the satellite along its orbit, measured in the orbital plane from the perigee direction to the satellite’s current position. It varies continuously from $0^{\circ}$ at perigee to $360^{\circ}$ after one complete revolution. In contrast, the mean anomaly, $M_e$, is a mathematical parameter that increases uniformly in time and serves as a convenient measure of the satellite’s orbital phase. The two are related through Kepler’s equation, given above by~\eqref{eq:kepler_equation}. This equation directly follows from a geometrical construct, first deduced by Mr Kepler himself, where a circumscribing circle is drawn upon the ellipse of orbit. For nonzero eccentricities, the relationship between $\theta$ and $M_e$ is nonlinear, but for circular orbits ($e = 0$), the three anomalies coincide:
+\[
+\,M_e = \varepsilon_e = \theta.\,
+\]
+This equality holds because the orbital motion is uniform and there is no distinction between the geometric and mean positions of the satellite along the orbit. Hence, for \textit{Starlink-3988}, whose eccentricity was found to be effectively zero, the mean anomaly directly represents the true anomaly at any given time. In our analysis, the mean anomaly was previously propagated forward from a known initial epoch to a later time in Section~\ref{sec:mean_anomaly}. Because for circular orbits $\theta = M_e$, the calculated value of mean anomaly at the target epoch also represents the true anomaly. Therefore, for consistency with the rest of this report, we adopt:
+\[
+\boxed{\,\bar{\theta} = \bar{M}_{e} = 321.55^{\circ},\,}
+\]
+which corresponds to the predicted orbital phase of \textit{Starlink-3988} at the time of the second TLE epoch.  
+As with the argument of perigee, the true anomaly value in this case is not of physical significance beyond defining a reference point along an otherwise circular orbit, but it is included here for completeness.
+
+\subsection{Extra: Evolution of Orbital Parameters} \label{sec:evolution_of_parameters}
+\begin{center}
+    \textit{Although never mentioned in the project instructions, we noticed the mark scheme included 10 points for plotting and reflecting upon the evolution of orbital parameters over several days. Since no instructions were given on how to perform this step, it was assumed that these 10 points survived a year-over-year update and were mistakenly left in the grading scheme. However, for completeness, we included some plots with data gathered from online sources regardless of this oversight.}
+\end{center}
+
+For the analysis carried out in this report, as previously stated with greater detail, we have assumed a perfectly circular orbit immune from external perturbations. As a result, our point predictions for all orbital parameters (see Section~\ref{sec:error_analysis} for details) are assumed to be static estimates, holding constant over time. However, no true orbit is perfectly circular, and all orbits in the real world are subject to perturbations arising from multiple factors (enumerated in Section~\ref{first_estimates_and_assumptions}). Consequently, the true values of orbital parameters will vary over time. This section aims to present plots of these time-dependent evolutions and reflect on their effects.
+
+As previously discussed in Section~\ref{sec:eccentricity}, the assumption of a circular orbit is well-reflected by a TLE value of eccentricity which is practically zero. As a result of this, the altitude of perigee, apogee, and semi-major axis are all nearly equal to the orbital altitude and to each other, and are roughly constant. The mean altitude, eccentricity, and inclination of the orbit, therefore, do not vary much over time. This is clearly visible in Figure~\ref{fig:parameters_plot_in_the_sky}, which shows the evolution of these three parameters over the entire mission duration since the launch of the satellite on May 14, 2022. The three values do not change much over time and stay very close to their nominal references. The small variation is attributable to perturbations described in Section~\ref{first_estimates_and_assumptions}, and it exhibits the typical white noise pattern, with no distinguishable features or trends. Also visible in Figure~\ref{fig:parameters_plot_in_the_sky}, top figure, is the sequential orbital insertion manoeuvre described in detail in Section~\ref{sec:intro}. It can be seen that the satellite was initially raised from an insertion orbit below \SI{330}{\kilo\metre} (the value is out of bounds and cannot be seen in the graph) to a temporary orbit of roughly \SI{360}{\kilo\metre}, then gradually elevated to its final orbit altitude of \SI{546.9}{\kilo\metre}. It can be seen that this manoeuvre took several months to finalise, which reflects the fact that the \textit{Starlink-v1.5} carry an ionic thruster onboard, which produces very low values of thrust. It can also be seen from the eccentricity plot (third figure) that the greatest variation in eccentricity was obtained during the orbit insertion period (and was still very small in magnitude).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{LaTeX/Figures/change_in_orbital_parameters.png}
+    \caption{Plots of mean altitude, inclination and eccentricity for the entire mission duration of the \textit{Starlink-3988} satellite. Data taken from the In The Sky website~\cite{inthesky_starlink3988}.}
+    \label{fig:parameters_plot_in_the_sky}
+\end{figure}
+
+Therefore, the constancy assumption on orbital parameters of eccentricity, semi-major axis and inclination carried throughout this report is demonstrated to be justified. Furthermore, as previously discussed in Section~\ref{sec:arg_of_perigee}, the argument of perigee carries no physical meaning due to the near-circular nature of the orbit, hence any discussion of its variation over time would be vacuous. The parameters left to discuss are then the true anomaly and right ascension of the ascending node (RAAN). True anomaly for a circular orbit has been demonstrated to be equivalent to mean anomaly, and its main usage is to identify the location of the satellite along the circular orbit at a given time. Its value consequently increases linearly over time, with a full revolution every orbital period. True anomaly has to be determined in a relative fashion, comparing it to a reference value (like we have done in the future prediction in Section~\ref{sec:mean_anomaly}). Any notion of the absolute value of mean anomaly is meaningless without an anchoring point. Hence, showing a plot of its evolution over time would not be very informative.
+
+On the other hand, the most interesting parameter to discuss is RAAN. This is the parameter most affected by perturbations, namely, Earth’s oblateness. Due to the equatorial bulge, Earth’s gravitational field departs from perfect sphericity, introducing a second zonal harmonic (as well as other, less impactful, higher order variations), \( J_{2} \), in its gravitational potential. This asymmetry exerts a torque on the orbital plane, leading to a slow, secular precession of the node. The effect is strongest for low-altitude, inclined orbits, where the gravitational gradient across the orbit is more pronounced. For near-circular orbits such as ours, this precession does not change the shape or size of the orbit, but only rotates the orbital plane around the Earth’s axis. The direction of this precession depends on inclination: for prograde orbits such as ours (inclination \( i = 53.2^{\circ} < 90^{\circ} \)), the node is expected to regress (moves westward). The approximate rate of change can be expressed as (see lecture notes for derivation):
+\[
+\dot{\Omega} \approx -\frac{3}{2}J_{2}\left(\frac{R_{E}}{a}\right)^{2}n\cos i,
+\]  
+showing explicitly the dependence on the Earth’s equatorial radius \( R_{E} \), mean motion \( n \), semi-major axis \( a \), and inclination \( i \). For the analysed orbit with estimated \( \bar{a} = 6938~\text{km} \) and \( \bar{i} = 52.82^{\circ} \) (other values from Table~\ref{tab:starlink3988_orbit}, noting $J_2 = \num{1.08263e-3}$, dimensionless), this corresponds to a precession of approximately $-3.7$ degrees per day, or nearly two full $-360^{\circ}$ cycles every six months (3.8 a year).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{LaTeX/Figures/Orbit-Data-Starlink-3988.png}
+    \caption{Plot of all six orbital parameters for six months prior to and including October 20th, 2025. Data from the Celestrak website~\cite{CelesTrak}.}
+    \label{fig:parameters_plot_celestrak}
+\end{figure}
+
+This theoretical expectation is clearly confirmed by Figure~\ref{fig:parameters_plot_celestrak}, which displays the temporal evolution of the orbital parameters obtained from the CelesTrak database over six months. The top panel of the figure shows a gradual, monotonic regression in RAAN of about two cycles (over the six months), fully consistent with the expected nodal regression calculated above. Meanwhile, the figure also confirms that the remaining parameters (semi-major axis, inclination, and eccentricity), remain effectively constant within the noise of the dataset over the six-month period. This confirms that the only long-term variation of importance for our nearly circular orbit arises from the precession of the node caused by Earth’s oblateness, as predicted by perturbation theory discussed in recent lectures.
+
+\section{Error Analysis} \label{sec:error_analysis}
+
+A summary of the six orbital parameters estimated in this report, compared against reference TLE data, is provided in Table~\ref{tab:error_table}. For each element, the first column reports the true value from Table~\ref{tab:starlink3988_orbit}, the second shows our empirical estimate, and the third presents the relative percentage error.
+
+\begin{table}[H]
+    \centering
+    \caption{Comparison between empirically estimated and TLE orbital parameters for \textit{Starlink-3988}.}
+    \label{tab:error_table}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|l|m{1.5cm}|m{2cm}|m{1cm}|m{3.5cm}|}
+        \hline
+        \textbf{Orbital Parameter} & \textbf{TLE Value} & \textbf{Estimated Value} & \textbf{Error (\%)} & \textbf{Comment} \\ \hline
+        Semi-Major Axis, $a$ (\si{\kilo\metre}) & 6917 & 6938 & 0.30 & Highly reliable; direct result from accurate $\tau$ estimate. \\ \hline
+        Eccentricity, $e$ () & 0.0001133 & 0.0148 $\pm$ 0.0194 & high & Unreliable; experimental precision insufficient to resolve such small values. \\ \hline
+        Inclination, $i$ (\si{\degree}) & 53.2146 & 52.82 $\pm$ 0.44 & 0.73 & Reliable; within uncertainty range of TLE. \\ \hline
+        RAAN, $\Omega$ (\si{\degree}) & 171.9324 & --- & N/A & Not measured; taken directly from TLE due to temporal limitation. \\ \hline
+        Argument of Perigee, $\omega$ (\si{\degree}) & 95.0058 & --- & N/A & Undefined for near-circular orbits; physically meaningless here. \\ \hline
+        True Anomaly, $\theta$ (\si{\degree}) & 265.1064 & 321.55 & 21.29 & Moderate; long propagation interval amplifies small period errors. \\ \hline
+    \end{tabular}
+\end{table}
+
+ The most significant and reliable determination arises from the orbital period, which directly governs the semi-major axis through Kepler’s third law. Both parameters were measured with high consistency, yielding errors below one percent when compared with catalogue data. This accuracy can be attributed to the internal precision of Method~1, which averages multiple right ascension–declination pairs to suppress random noise and timing biases. Further, this is the task of the project towards which the most effort was invested, with detailed error and uncertainty analysis, including plots, refinements with outliar removal, and an extensive discussion, all present in Section~\ref{first_estimates_and_assumptions}.
+
+By contrast, eccentricity proved intractable to estimate with the available data. The very small true value ($e \sim 10^{-4}$) is several orders of magnitude below the experimental sensitivity achievable through angular-velocity propagation, leading to a result dominated by numerical noise. Although our computed $e$ is formally nonzero, its associated uncertainty fully encompasses the true value, confirming that the orbit is effectively circular within measurement precision.
+
+The inclination measurement demonstrates both consistency and practical reliability. The result agrees with the TLE value to within less than one degree, a deviation smaller than the propagated instrumental uncertainty from the azimuth–elevation data. This indicates that the geometric method used, though simplified, provides a credible estimate for $i$ when based on a clear mid-pass observation. However, it should be noted that the accuracy of the estimate was highly dependent on the selection of which data to adopt. We hypothesise that this is because observations taken near the mid-point of a pass sample the satellite when it is highest above the horizon and closest to the observer, which minimises projection errors.
+
+For the argument of perigee and RAAN, no experimental determination was attempted. Both parameters are intrinsically difficult to measure over short observational windows: $\omega$ is undefined for circular orbits, while $\Omega$ varies only slowly over several days due to nodal precession and thus cannot be retrieved without long-term tracking. Their catalogue values are included purely for completeness. It should be noted that a lengthy discussion of the recession of RAAN was held in Section~\ref{sec:evolution_of_parameters}.
+
+Finally, the propagation of mean anomaly over fifteen orbits yielded a phase difference of approximately $56.4^{\circ}$, corresponding to an error of $\sim21\%$. This relatively large discrepancy is physically interpretable: even a minute deviation in the measured orbital period accumulates over multiple revolutions, leading to significant phase drift. Our attempted prediction was ambitious at almost two days into the future, and a prediction over a smaller time window would likely have yielded better results. This highlights the sensitivity of mean and true anomaly predictions to small timing uncertainties and justifies why long-term propagation using observationally derived periods is inherently unstable.
+
+Beyond these geometric considerations, several other sources of uncertainty were identified and quantified across different parts of this report. These include: (1) human reaction and timing errors during visual data collection (discussed in Section~\ref{sec:data}); (2) rounding and discretisation in the conversion from azimuth–elevation to right ascension–declination coordinates; (3) limited temporal resolution in online tracking datasets, particularly in Method~4; (4) the simplifying assumption of circular motion, which introduces small systematic biases when eccentricity is non-zero; and (5) atmospheric and refraction effects near the horizon, which become significant during low-elevation measurements. The propagation of these uncertainties was explicitly derived for the period, angular velocity, and eccentricity estimates in Sections~\ref{first_estimates_and_assumptions} and~\ref{sec:eccentricity}. Collectively, these constitute the dominant contributions to the experimental error budget and justify the relative weighting of confidence assigned to each parameter. Several improvements could be implemented to reduce these errors in future experiments. First, an automated timestamping system or digital photometric tracker would remove human latency in manual time logging (although this was already implemented for Method 4, later discarded). Second, recording data at multiple ground stations or over consecutive nights would allow RAAN and nodal precession to be empirically measured rather than inferred from TLEs. Third, acquiring higher-frequency angular data (for instance, one sample per second rather than per minute) would improve the fidelity of $\omega$ and $\theta$ propagation, with the caveat of increasing data-processing demands. Finally, applying a least-squares orbital fit to multiple passes, rather than using discrete pairwise comparisons, would reduce random scatter and provide statistically rigorous uncertainties when estimating the orbital period. These methodological refinements would strengthen the precision of future empirical orbital determinations while maintaining the accessible, ground-based approach of this project.
+
+Overall, the experiment achieved acceptable agreement for geometric and temporal parameters (semi-major axis, inclination, and period), while anomalies and shape descriptors (eccentricity and true anomaly) remain constrained by measurement limits and simplifying assumptions. These outcomes confirm that, despite the modest tools used, the circular-orbit approximation and two-body framework adopted throughout the report provide a valid and self-consistent characterisation of the \textit{Starlink-3988} orbit.
 
 \section{Conclusion}
 
+This project has demonstrated the practical determination of a satellite’s orbit through a combination of observational data and theoretical orbital mechanics. Using a series of elevation and azimuth measurements recorded across multiple passes of \textit{Starlink-3988}, each of the six classical orbital parameters was derived and compared against official Two-Line Element (TLE) values. The methods employed showed encouraging consistency, particularly for orbital period, semi-major axis and inclination, which matched the published data within the propagated measurement uncertainty. 
+
+Beyond the numerical results, the project offered a clear understanding of how theoretical models connect with real-world observation. Through this process, I personally developed a great appreciation for how orbital mechanics, while elegantly simple in formulation, demands careful treatment of data and assumptions to yield meaningful predictions. On top of this, I have strengthened my admiration for Starlink and its constellation: by continuously tracking satellites in the night sky, I quickly realised just how many Starlink units are present in the heavens, and constantly zooming by as we live our lives in negligence of this engineering marvel. Finally, the experience of observing, processing, and critically comparing results created a stronger physical intuition for orbital motion and an appreciation and admiration for the challenges faced by mission analysts who perform these calculations at professional accuracy.
+
+
+
 \section{Visualisation}
+\begin{center}
+    \textit{Although specifically required by the project instructions, we noticed the mark scheme included no points for the visualisation step. It was assumed that this was once again an artefact of a year-over-year revision. We nevertheless exhausted this step for completeness.}
+\end{center}
+
+A visualisation of the results reported in Table~\ref{tab:error_table} is displayed in Figure~\ref{fig:data_visualisation}, which compares the estimated parameters with the TLE data. The most noticeable difference in the two orbits is the error in true (mean) anomaly, as the two satellites appear at different locations along their orbits. The plots were created using \texttt{Python}, and the code developed to create them is also available at the supporting repository.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{}
+    \caption{A visualisation of the estimated and TLE orbital data. The left figure shows the estimated data, the right figure the TLE data.}
+    \label{fig:data_visualisation}
+\end{figure}
 
 \printbibliography
 
@@ -588,13 +842,13 @@ Screenshots of the mobile apps used for the observations. The screenshots show t
     \begin{subfigure}[b]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{LaTeX/Figures/Satellite_Tracker_Screenshot.jpg}
-        \caption{Satellite Tracker app}
+        \caption{Satellite Tracker app.}
         \label{fig:tracker_screenshot}
     \end{subfigure}
     \begin{subfigure}[b]{0.35\textwidth}
         \centering
         \includegraphics[width=\textwidth]{LaTeX/Figures/Satellite_Tracker_Pro_Screenshot.jpg}
-        \caption{Satellite Tracker Pro app}
+        \caption{Satellite Tracker Pro app.}
         \label{fig:tracker_pro_screenshot}
     \end{subfigure}
     
@@ -604,7 +858,7 @@ Table~\ref{tab:method1_data_comparison} shows the data collected from the In The
 
 \begin{table}[H]
     \centering
-    \caption{Comparison data from the In The Sky website}
+    \caption{Comparison data from the In The Sky website.}
     \label{tab:method1_data_comparison}
     \renewcommand{\arraystretch}{1.2}
     \begin{tabular}{|c|c|c|c|c|c|}
